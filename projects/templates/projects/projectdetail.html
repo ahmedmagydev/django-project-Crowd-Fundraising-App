@@ -1,0 +1,473 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %} 
+{% load custom_tags %}
+{% block 'title' %}
+Donation
+{% endblock %}
+{% block 'content' %}
+
+<!--Start Page Header-->
+<section class="page-header">
+   <div class="page-header__bg" style="background-image: url('{% static "images/backgrounds/page-header-bg.jpg" %}')">
+   <div class="container">
+      <div class="page-header__inner text-center">
+         <h2>Project Details</h2>
+         <ul class="thm-breadcrumb">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><span>-</span></li>
+            <li>Project Details</li>
+         </ul>
+      </div>
+   </div>
+</section>
+
+<!--End Page Header-->
+<!--Start Donation Details-->
+{% if messages %}
+<div class="container m-4 p-2">
+    {% include 'includes/messages.html' %}
+</div>
+{% endif %}
+<section class="donation-details">
+   <div class="container">
+      <div class="row">
+         <!--Start Donation Details Content-->
+         <div class="col-xl-8">
+            <div class="donation-details__content">
+               <div class="donation-details__content-img1">
+                  <div id="carouselExampleIndicators" class="carousel slide">
+                     <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                     </div>
+                     <div class="carousel-inner">
+                        {% for img in images %}
+                        {% if img.project == project %}
+                        <div class="carousel-item active">
+                           <img src="{{ img.image.url }}" style="height:300px" alt="#">
+                        </div>
+                        {%  endif %}
+                        {% endfor %}
+                     </div>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden">Previous</span>
+                     </button>
+                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden">Next</span>
+                     </button>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                     <a class="text-white btn btn-warning" href="{% url 'editproject' project.id %}"> Edit</a>
+                     <a href="{% url 'deleteproject' project.id %}" class="text-white btn btn-danger"
+                        >Delete</a
+                        >
+                  </div>
+                  <!-- {% if request.user.created_by %} -->
+                  <!-- {% else %} -->
+                  <!-- <a href="{% url 'home' %}" class="text-white btn btn-info">Contact Seller</a> -->
+                  <!-- {% endif %} -->
+                  <div class="text-box">
+                     {{project.title}}
+                  </div>
+               </div>
+               <div class="donation-details__content-text-box1">
+                  <h2 class="d-inline">{{project.title}} </h2>
+                  <div class="icon-box d-inline ms-2">
+                     {% get_user_react_on_project project as user_reaction %}
+                     {% if user_reaction %}
+                     <a href={% url 'toggle_like_project' project.id %}> 
+                     <i class="fa-solid fa-heart fa-2x like"></i>
+                     </a>
+                     {% else %}
+                     <a href={% url 'toggle_like_project' project.id %}> 
+                     <i class="fa-regular fa-heart"></i>
+                     </a>
+                     {% endif %}
+                  </div>
+                  <div class="donation-details__progress">
+                     <div class="donation-details__progress-bg"
+                     style="background-image: url('{% static "images/shapes/donation-details-shape1.jpg" %}');">
+                  </div>
+                  <div class="donation-details__progress-inner">
+                     <div class="donation-details__progress-box">
+                        <div class="bar">
+                           <div class="bar-inner count-bar" data-percent="45%">
+                              <div class="count-text">45%</div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="bottom-text">
+                        <div class="left-text">
+                           <p>{{project.total_donation}} <span>Raised </span></p>
+                        </div>
+                        <div class="right-text">
+                           <p>{{project.total_donation}} of {{project.target_budget}}</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="donation-details__content-text-box2">
+              
+               <div class="single-text-box">
+                  <h2>Project Target & description</h2>
+                  <p>{{project.details}}
+                  </p>
+               </div>
+            </div>
+            <div class="donation-details__content-text-box3">
+               <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-6">
+                     <div class="donation-details__content-text-box3-img">
+                        <img src="{% static 'images/resources/donation-details-img2.jpg' %}" alt="#">
+                     </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6">
+                     <div class="donation-details__content-text-box3-content">
+                        <h2 class="m-3">Project Features</h2>
+                        <ul>
+                           {%for feature in project.features%}
+                           <li>
+                              <p> <span class="icon-check2"></span>
+                                 {{feature}}
+                              </p>
+                           </li>
+                           {%endfor%}
+                        </ul>
+                        <div class="text-box">
+                           <p>Nemo enim ipsam voluptatem quia
+                              voluptas on but the majority have alteration in some to injected or
+                              words which don't look even toslightly growing up in poverty
+                              children face
+                              tough hunge and malnutrition
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="comment-one">
+               <h2 class="comment-one__title">Comments ({{project_comments_number}})</h2>
+               {%for comment in project_comments%}
+               {% comment %} comment {% endcomment %}
+               <div class="comment-one__single m-2">
+                  <div class="comment-one__single-inner">
+                     {% get_user_info comment.user as user_info %}
+
+                     <div class="comment-one__image">
+                        <img src={{user_info.photo.url}} />                     </div>
+                     <div class="comment-one__content">
+                        <div class="top-box">
+                           <div class="text-box">
+
+                              <h3>{{user_info.username}} {{user_info.last_name}}</h3>
+                           </div>
+                           <div class="btn-box">
+                              <a data-bs-toggle="collapse" 
+                                 href="#collapseExample{{comment.id}}" role="button" aria-expanded="false"
+                                 aria-controls="collapseExample"
+                                 class="comment-one__btn">Reply</a>
+                              {% comment %} report comment {% endcomment %}
+                              <a class="btn btn-danger " href={% url 'reportComment'  project.id comment.id %} >
+                              Reprot</a>
+                           </div>
+                        </div>
+                        <div class="bottom-box">
+                           <p>
+                              {{comment.comment_content}}
+                           </p>
+                           <span>{{comment.created_at|date:'d M'}}</span>
+                        </div>
+                        <div class="collapse" id="collapseExample{{comment.id}}">
+                           <div class="card card-body">
+                              <form action="{% url 'addReply' project.id comment.id  %}" id="contact-form" class="default-form2 contact-form-validated comment-one__form" method="POST">
+                                 {% csrf_token %}
+                                 <div class="row">
+                                    <div class="col-xl-12">
+                                       <div class="input-box">
+                                          <p class="text-danger"> {{commentForm.comment_content.errors }}</p>
+                                          <!-- {{commentForm.comment_content.label }} -->
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-xl-12">
+                                       <div class="input-box">
+                                          {{commentForm.comment_content | safe}}
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                       <div class="comment-form__btn">
+                                          <button class="thm-btn" type="submit" data-loading-text="Please wait...">
+                                          <span class="txt">Add Relpy</span>
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="comment-one__single mb0 mt-2">
+                  {% for reply in replys%}
+                  {%if reply.comment_id == comment%}
+                  <div class="comment-one__single-inner mt-4">
+                     {% get_user_info reply.user as user_reply_info %}
+                     <div class="comment-one__image">
+                        <img src={{user_reply_info.photo.url}} />
+                     </div>
+                     <div class="comment-one__content">
+                        <div class="top-box">
+                           <div class="text-box">
+                              <h3>{{user_reply_info.username}} {{user_reply_info.last_name}}</h3>
+                           </div>
+                           <!-- <div class="btn-box">
+                              <a href="#" class="comment-one__btn">Reply</a>
+                              </div> -->
+                        </div>
+                        <div class="bottom-box">
+                           <p>{{reply.reply_content}} </p>
+                           <span>{{reply.created_at |date:'d M'}}</span>
+                        </div>
+                     </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}  
+               </div>
+               {% endfor %}
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="comment-form">
+               <h2 class="comment-form__title">Leave A Comment</h2>
+               <form action={% url 'addComment' project.id %} id="contact-form" class="default-form2 contact-form-validated comment-one__form" method="POST">
+               {% csrf_token %}
+               <div class="row">
+                  <div class="col-xl-12">
+                     <div class="input-box">
+                        <p class="text-danger"> {{commentForm.comment_content.errors }}</p>
+                        <!-- {{commentForm.comment_content.label }} -->
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xl-12">
+                     <div class="input-box">
+                        {{commentForm.comment_content | safe}}
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12">
+                     <div class="comment-form__btn">
+                        <button class="thm-btn" type="submit" data-loading-text="Please wait...">
+                        <span class="txt">Submit Comment</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               {% else %}
+               <h5>You are not logged in, to add comment shuld be to <a class="text-info m-2" href="{% url 'login' %}">login now!!</a> </h5>
+               {% endif %}
+               </form>
+            </div>
+            <!-- related projects  -->
+            <div class="donation-details__content-text-box4">
+               <div class="title-box">
+                  <h2>Related Projects ({{project.category.project_category.all.count|add:"-1" }})</h2>
+                  {% comment %} <p>Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. but the
+                     majority have alteration in some injected or words which don't look even
+                     slightly believable. 
+                  </p> {% endcomment %}
+               </div>
+               <div class="row">
+                  {% for p in project.category.project_category.all %}
+                  {% if p.id != project.id %}
+      
+                  <div class="col-xl-3 col-lg-3 col-md-3">
+                     <div class="donation-details__content-text-box4-single">
+                        <div class="img-box">
+                           {% for img in images %}
+                           {% if img.project == p %}
+                               <img src="{{ img.image.url }}"  alt="#">
+                           {%  endif %}
+                           {% endfor %}
+                        </div>
+                        <div class="text-box text-center">
+                           <h3>
+                              <a  href={% url 'singleproject' p.id %} >
+                              {{p.title}} </a></h3>
+                           <h4>{{p.target_budget}}</h4>
+                           <p>{{p.created_at|date:'d M'}}</p>
+                        </div>
+                     </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+
+            
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--End Donation Details Content-->
+      <!--Start Sidebar-->
+      <div class="col-xl-4">
+         <div class="sidebar">
+            <!--Start Sidebar Single-->
+            <div class="sidebar__single sidebar__donation wow animated fadeInUp" data-wow-delay="0.1s">
+               <div class="sidebar__donation-box text-center">
+                  <div class="sidebar__donation-bg"
+                  style="background-image: url('{% static "images/shapes/sidebar-donation-shape.jpg" %}');">
+               </div>
+               <div class="text-box">
+                  <h2>{{project_total_donation}}</h2>
+               </div>
+               <a class=" btn btn-danger "href={% url 'reportProject'  project.id %} >
+               Reprot Proejct</a>
+               <div class="title">
+                  <h2>How Your Donation Makes <br> a Difference</h2>
+               </div>
+               <div class="btn-box">
+                  <a href="{% url 'submit_donation' project.id %}?amount=20">Donation $20</a>
+               </div>
+            </div>
+         </div>
+         <!--End Sidebar Single-->
+         <!--Start Sidebar Single-->
+         <div class="sidebar__single sidebar__donation-two wow animated fadeInUp"
+            data-wow-delay="0.2s">
+            <div class="sidebar__donation-two-box text-center">
+               <div class="sidebar__donation-two-bg"
+               style="background-image: url('{% static "images/blog/sidebar-donation-two-bg.jpg" %}');">
+            </div>
+            <div class="text-box">
+               <div class="comment-form">
+                  <form action="{% url 'submit_donation' project.id %}" id="contact-form" class="default-form2 contact-form-validated comment-one__form" method="POST">
+                     {% csrf_token %}
+                     <div class="input-box">
+                        <p>{{donationForm.donation.errors}}</p>
+                        <div class="text-box">
+                           <h2>{{donationForm.donation.label}}</h2>
+                        </div>
+                        <div class="row">
+                           <div class="col-xl-12 col-lg-12 col-md-12">
+                              <div class="input-box">
+                                 {{donationForm.donation}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <button class="thm-btn" type="submit" data-loading-text="Please wait...">
+                     <span class="txt">Donate</span>
+                     </button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--End Sidebar Single-->
+      <!-- ------------------rate ---------------------- -->
+        <!--Start Sidebar Single-->
+       
+       <div class="sidebar__single sidebar__donation wow animated fadeInUp" data-wow-delay="0.1s">
+         <div class="sidebar__donation-box text-center">
+            <div class="sidebar__donation-bg"
+            style="background-image: url('{% static "images/shapes/sidebar-donation-shape.jpg" %}');">
+         </div>
+         <div class="title">
+            <h2>How Your Rate Makes <br> a Difference</h2>
+         </div>
+         <div class="btn-box">
+            {% if rateForm %}
+            <form method="post" enctype="multipart/form-data" action="{% url 'rateProject' project.id  %}">
+               {% csrf_token %}
+               {% crispy rateForm %}
+            </form>
+            {% else %}
+            <div class="btn-box">
+               <a >{{user_rate_to_show}}</a>
+            </div>
+            {% endif %}
+         </div>
+         <div class="title m-2">
+            <h2>Project avrage Rate</h2>
+         </div>
+         <div class="btn-box">
+            <a >{{avg_rate}}</a>
+         </div>
+      </div>
+   </div>
+   
+   <!--End Sidebar Single-->
+      <div class="sidebar__bottom wow animated fadeInUp" data-wow-delay="0.3s">
+         <div class="sidebar__bottom-bg"
+         style="background-image: url('{% static "images/shapes/sidebar-bottom-shape.jpg" %}');">
+      </div>
+      <!--Start Sidebar Single-->
+      <div class="sidebar__single sidebar__latest-post">
+         <div class="title-box">
+            <h2>Projects with same Tags</h2>
+         </div>
+         <ul class="sidebar__latest-post-list">
+            {% recently_created_projects as project_recent %}
+            {%for proj in similar_projects%}
+            <li>
+               <div class="img-box">
+                  <img src="{% static 'images/blog/sidebar-latest-post-img1.jpg' %}" alt="#">
+               </div>
+               <div class="content-box">
+                  <p> <span class="icon-calendar"></span> {{proj.created_at|date:'d M'}}
+                  </p>
+                  <h3><a href={% url 'singleproject' proj.id %}>{{proj.slug}}</a></h3>
+               </div>
+            </li>
+            {%endfor%}
+           
+         </ul>
+      </div>
+      <!--End Sidebar Single-->
+      <!--Start Sidebar Single-->
+   
+      <div></div>
+
+
+      <div>
+         <div class="sidebar__single sidebar__popular-tags">
+            <div class="title-box">
+               <h2>Project Tags</h2>
+            </div>
+            <ul class="sidebar__popular-tags-list">
+               {%for tag in project.tags.all %}
+               <li><a href={% url 'filter_Projects_by_tag' tag.caption %}>{{tag}}</a></li>
+               {%endfor%}
+               {% comment %} 
+               <li><a href="#">Food</a></li>
+               <li><a href="#">Giving</a></li>
+               <li><a href="#">Children</a></li>
+               <li><a href="#">Fundraising</a></li>
+               <li><a href="#">Seo</a></li>
+               <li><a href="#">Education</a></li>
+               <li><a href="#">Healthcare </a></li>
+               <li><a href="#">Help people</a></li>
+               {% endcomment %}
+            </ul>
+         </div>
+      </div>
+      <!--End Sidebar Single-->
+   </div>
+   </div>
+   </div>
+   <!--End Sidebar-->
+   </div>
+   </div>
+</section>
+<!--Start Donation Details-->
+{% endblock %}

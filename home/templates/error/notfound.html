@@ -1,0 +1,41 @@
+{% extends 'home/base.html' %}
+
+{% block 'title' %}
+404
+{% endblock 'title' %}
+
+{% block 'content' %}
+
+        <!--Start Error Page-->
+        <section class="error-page">
+            <div class="error-page__bg" style="background-image: url(assets/images/pattern/error-page-bg.jpg);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="error-page__inner text-center">
+                            <h2><span class="clr1">4</span><span class="clr2">0</span><span class="clr3">4</span></h2>
+                            <h3>Opps! you’r on the wrong place.</h3>
+                            <p>The page requested could not be found. This could be a spelling error <br> in the URL or
+                                a removed page.</p>
+
+                            <div class="error-page__search">
+                                <form class="search-form" action="#">
+                                    <input placeholder="Search topic" type="text">
+                                    <button type="submit"><i class="icon-search"></i></button>
+                                </form>
+                            </div>
+
+                            <div class="error-page__btn">
+                                <a class="thm-btn" href="index.html">
+                                    <span class="txt">Back To Home</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Error Page-->
+
+     
+{% endblock 'content' %}

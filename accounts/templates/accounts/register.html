@@ -1,0 +1,28 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block 'content' %}
+<div class="container">
+    <div class="content-section">
+        <form method="POST" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+            </fieldset>
+
+
+            <div class="form-group">
+                <button class="btn btn-outline-success m-2" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3 fs-5 m-2">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

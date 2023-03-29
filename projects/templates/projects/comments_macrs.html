@@ -1,0 +1,18 @@
+{% macro lst_project_comments_macro(project_comments)%}
+ {%for comment in project_comments%}
+<div class="top-box">
+    <div class="text-box">
+        <h3>Adam Pinakaki</h3>
+    </div>
+
+    <div class="btn-box">
+        <a href="#" class="comment-one__btn">Reply</a>
+    </div>
+</div>
+
+<div class="bottom-box">
+    <p>comment.comment_content</p>
+    <span>comment.created_at</span>
+</div>
+{% endfor %}
+{%endmacro%}

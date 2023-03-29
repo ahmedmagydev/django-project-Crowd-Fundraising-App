@@ -1,0 +1,742 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block 'title' %}
+Home
+{% endblock 'title' %}
+{% load custom_tags %}
+{% block 'content' %}
+{% if messages %}
+<div class="container m-5 p-2">
+   {% include 'includes/messages.html' %}
+</div>
+{%endif%}
+<!--Start Main Slider -->
+<section class="main-slider main-slider-one">
+   <div class="main-slider-one__inner">
+      <div class="owl-carousel owl-theme thm-owl__carousel testimonial-one__carousel nav-style1 dot-style1"
+         data-owl-options='{
+         "loop": true,
+         "autoplay": true,
+         "animateOut": "slideOutDown",
+         "animateIn": "fadeIn",
+         "margin": 0,
+         "nav": true,
+         "dots": true,
+         "smartSpeed": 500,
+         "autoplayTimeout": 10000,
+         "navText": ["<span class=\"icon-arrow-right1\"></span>","<span class=\"icon-arrow-right\"></span>"],
+         "responsive": {
+         "0": {
+         "items": 1
+         },
+         "768": {
+         "items": 1
+         },
+         "992": {
+         "items": 1
+         },
+         "1200": {
+         "items": 1
+         }
+         }
+         }'>
+         <!--Start Main Slider One Single-->
+         <div class="main-slider-one__single">
+            <div class="image-layer" style="background-image:url("{% static 'images/slides/slider-v1-img1.jpg' %}")">
+         </div>
+         <div class="shape1"><img src="{% static 'images/shapes/main-slider-v1-shape1.png' %}" alt="#"></div>
+         <div class="shape2"><img src="{% static 'images/shapes/main-slider-v1-shape2.png' %}" alt="#"></div>
+         <div class="container">
+            <div class="main-slider-one__content">
+               <div class="tagline">
+                  <span>All-in-one Giving</span>
+               </div>
+               <div class="title">
+                  <h2>Give the Gift <br> today!</h2>
+               </div>
+               <div class="text">
+                  <p>We want to make giving simple, fun and meaningful for you. <br> The
+                     possibilities
+                     are endless!
+                  </p>
+               </div>
+               <div class="btn-box">
+                  <a class="thm-btn" href="donation.html">
+                  <span class="txt">Donation Now</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--End Main Slider One Single-->
+      <!--Start Main Slider One Single-->
+      <div class="main-slider-one__single">
+         <div class="image-layer" style="background-image:url("{% static 'images/slides/slider-v1-img2.jpg' %}")">
+      </div>
+      <div class="shape1"><img src="{% static 'images/shapes/main-slider-v1-shape1.png' %}" alt="#"></div>
+      <div class="shape2"><img src="{% static 'images/shapes/main-slider-v1-shape2.png' %}" alt="#"></div>
+      <div class="container">
+         <div class="main-slider-one__content">
+            <div class="tagline">
+               <span>All-in-one Giving</span>
+            </div>
+            <div class="title">
+               <h2>Give the Gift <br> today!</h2>
+            </div>
+            <div class="text">
+               <p>We want to make giving simple, fun and meaningful for you. <br> The
+                  possibilities
+                  are endless!
+               </p>
+            </div>
+            <div class="btn-box">
+               <a class="thm-btn" href="donation.html">
+               <span class="txt">Donation Now</span>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--End Main Slider One Single-->
+   <!--Start Main Slider One Single-->
+   <div class="main-slider-one__single">
+      <div class="image-layer" style="background-image:url("{% static 'images/slides/slider-v1-img3.jpg' %}")">
+   </div>
+   <div class="shape1"><img src="{% static 'images/shapes/main-slider-v1-shape1.png' %}" alt="#"></div>
+   <div class="shape2"><img src="{% static 'images/shapes/main-slider-v1-shape2.png' %}" alt="#"></div>
+   <div class="container">
+      <div class="main-slider-one__content">
+         <div class="tagline">
+            <span>All-in-one Giving</span>
+         </div>
+         <div class="title">
+            <h2>Give the Gift <br> today!</h2>
+         </div>
+         <div class="text">
+            <p>We want to make giving simple, fun and meaningful for you. <br> The
+               possibilities
+               are endless!
+            </p>
+         </div>
+         <div class="btn-box">
+            <a class="thm-btn" href="donation.html">
+            <span class="txt">Donation Now</span>
+            </a>
+         </div>
+      </div>
+   </div>
+   </div>
+   <!--End Main Slider One Single-->
+   </div>
+   </div>
+</section>
+<!--End Main Slider-->
+<!--Start Feature One -->
+<section class="feature-one">
+   <div class="container">
+      <div class="row">
+         <div class="sec-title text-center">
+            <div class="sec-title__tagline">
+               <h6>Our top rated projects so far</h6>
+            </div>
+            <h2 class="sec-title__title">top rated projects</h2>
+         </div>
+         {%for project in all_rates %}
+         {%if project.avg_rate %}
+         <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay=".3s">
+            <div class="blog-one__single">
+               <div class="blog-one__single-img">
+                  <div class="inner">
+                     {% for img in images %}
+                     {% if img.project == project %}
+                     <img src="{{ img.image.url }}" style="height:300px" alt="#">
+                     {%  endif %}
+                     {% endfor %}
+                  </div>
+                  <ul class="overlay-text">
+                     <li>
+                        <p>{{project.avg_rate}}</p>
+                     </li>
+                     <li class="style2">
+                        <p>{{project.created_at|date:'d M'}}</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="blog-one__single-content">
+                  <div class="white-bg"></div>
+                  <div class="left-bg"></div>
+                  <div class="right-bg"></div>
+                  <ul class="meta-box">
+                     <li>
+                        <div class="icon">
+                           <span class="icon-user"></span>
+                        </div>
+                        <div class="text">
+                           <p><a href="#">By {{project.user|capfirst}}</a></p>
+                        </div>
+                     </li>
+                     <li>
+                        <div class="icon">
+                           <span class="icon-comment-outline"></span>
+                        </div>
+                        <div class="text">
+                           {% load custom_tags %}
+                           <p><a href="{% url 'singleproject' project.id %}"> {% get_method project %} Comment</a></p>
+                        </div>
+                     </li>
+                  </ul>
+                  <h2><a href={% url 'singleproject'  project.id%}>{{project.title}}<br> International UK</a></h2>
+                  <div class="blog-one__single-content-bottom">
+                     <div class="btn-box">
+                        <a href={% url 'singleproject' project.id %}>Details More <span
+                           class="icon-right-arrow21"></span></a>
+                     </div>
+                     <div class="icon-box">
+                        {% get_user_react_on_project project as user_reaction %}
+                        {% if user_reaction %}
+                        <a href={% url 'like_project' project.id %}> 
+                        <i class="fa-solid fa-heart fa-2x like"></i>
+                        </a>
+                        {% else %}
+                        <a href={% url 'like_project' project.id %}> 
+                        <i class="fa-regular fa-heart"></i>
+                        </a>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {%endif%}
+         {%endfor%}
+         <!--End Feature One Single-->                
+      </div>
+   </div>
+</section>
+<!--End Feature One --> 
+<!--Start Feature One -->
+<section class="feature-one">
+   <div class="container">
+      <div class="row" id="trusted_projects">
+         <div class="sec-title text-center">
+            <div class="sec-title__tagline">
+               <h6>Our approvedprojects so far</h6>
+            </div>
+            <h2 class="sec-title__title">Our Trustworthy Projects </h2>
+         </div>
+         <!--Start Feature One Single-->
+         {% for approved_proj in approved_projects %}
+         <div class="col-xl-4 col-lg-4 wow animated fadeInUp" data-wow-delay="0.1s">
+            <div class="feature-one__single text-center">
+               <div class="shape2"><img src="{% static  'images/shapes/feature-v1-shape1.png' %} " alt="#"></div>
+               <div class="shape3"><img src="{% static  'images/shapes/feature-v1-shape2.png' %} " alt="#"></div>
+               <div class="feature-one__single-icon">
+                  <div class="shape1"></div>
+                  <span class="icon-donation-1"></span>
+               </div>
+               <div class="feature-one__single-content">
+                  {% get_user_info approved_proj.user as user_info %}
+                  <h2><a href="{% url 'singleproject' approved_proj.id %}">{{approved_proj.title}}</a></h2>
+                  <p>Donec scelerisque egestas purus eget
+                     <br> by {{user_info.username|capfirst}} {{user_info.last_name|capfirst}}
+                  </p>
+               </div>
+            </div>
+         </div>
+         {%endfor%}
+         <!--End Feature One Single-->
+      </div>
+   </div>
+</section>
+<!--End Feature One -->
+<!--Start About One -->
+<section class="about-one">
+   <div class="shape5 float-bob-y"><img src="{% static  'images/shapes/about-v1-shape3.png' %}" alt="#"></div>
+   <div class="container">
+      <div class="row">
+         <!--Start About One Content-->
+         <div class="col-xl-7">
+            <div class="about-one__content">
+               <div class="sec-title">
+                  <div class="sec-title__tagline">
+                     <h6>Know About Our Gifall</h6>
+                  </div>
+                  <h2 class="sec-title__title">Let's Retain & Grow <br> Your Donor Base</h2>
+               </div>
+               <div class="about-one__content-text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, Here's what <br> to know
+                     about how to start a consulting business
+                  </p>
+               </div>
+               <div class="about-one__content-bottom">
+                  <div class="row">
+                     <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="about-one__content-bottom-left">
+                           <div class="single-box">
+                              <div class="inner">
+                                 <div class="icon-box">
+                                    <div class="shape1"></div>
+                                    <span class="icon-donation-4"></span>
+                                 </div>
+                                 <div class="content-box">
+                                    <h2>Fundrising</h2>
+                                    <p>Lorem ipsum dolor sit amet tetur nod adipisicing elit sed</p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="single-box mb0">
+                              <div class="inner">
+                                 <div class="icon-box">
+                                    <div class="shape1"></div>
+                                    <span class="icon-donation-1"></span>
+                                 </div>
+                                 <div class="content-box">
+                                    <h2>Make Donation</h2>
+                                    <p>Lorem ipsum dolor sit amet tetur nod adipisicing elit sed</p>
+                                 </div>
+                              </div>
+                           </div>
+                           <ul class="about-one__content-bottom-left-list">
+                              <li>
+                                 <p>Raised For Charities</p>
+                              </li>
+                              <li>
+                                 <p>Registered Charities Supported</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="about-one__content-bottom-right">
+                           <div class="about-one__helped-fund text-center">
+                              <div class="shape3 float-bob-y"></div>
+                              <div class="about-one__helped-fund-bg"
+                              style="background-image: url("{% static 'images/backgrounds/about-v1-bg.png' %}");">
+                           </div>
+                           <div class="img-box">
+                              <div class="inner">
+                                 <img src="{% static  'images/about/about-v1-img1.jpg' %}" alt="#">
+                              </div>
+                              <div class="shape2 rotate-me"><img
+                                 src="{% static  'images/shapes/about-v1-shape1.png' %}" alt="#">
+                              </div>
+                           </div>
+                           <div class="content-box">
+                              <h2>34,434</h2>
+                              <h3>Helped fund </h3>
+                              <p>Wishes all over the world.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--End About One Content-->
+      <!--Start About One Img-->
+      <div class="col-xl-5">
+         <div class="about-one__img">
+            <div class="about-one__img-inner">
+               <div class="shape4"><img src="{% static  'images/shapes/about-v1-shape2.png' %}" alt="#"></div>
+               <img src="{% static  'images/about/about-v1-img2.jpg' %}" alt="#">
+            </div>
+         </div>
+      </div>
+      <!--End About One Img-->
+   </div>
+   <div class="about-one__bottom">
+      <div class="about-one__bottom-inner">
+         <div class="about-one__bottom-content">
+            <div class="icon-box">
+               <span class="icon-donation-2"></span>
+            </div>
+            <div class="text-box">
+               <h2>Since 1980, we’ve granted more than <br> 120,000 wishes all over the world.</h2>
+            </div>
+         </div>
+         <div class="about-one__bottom-btn">
+            <a class="thm-btn" href="about.html">
+            <span class="txt">Learn About us</span>
+            </a>
+         </div>
+      </div>
+   </div>
+   </div>
+</section>
+<!--End About One -->
+<!--Start Case One -->
+<section class="case-one">
+   <div class="case-one__bg" style="background-image: url("{% static 'images/backgrounds/case-v1-bg.jpg' %}");"></div>
+   <div class="auto-container">
+      <div class="sec-title text-center">
+         <div class="sec-title__tagline">
+            <h6>Projects based on your selected categories</h6>
+         </div>
+         <h2 class="sec-title__title">Begin giving to them</h2>
+      </div>
+      <div class="row m-2" id="projs_by_cat">
+         <!--Start Case One Single-->
+         {%for proj in projs_by_cat%}
+         <div class="col-xl-4 col-lg-6 col-md-6  wow fadeInLeft" data-wow-delay="0ms"
+            data-wow-duration="1000ms">
+            <div class="case-one__single">
+               <div class="case-one__single-img">
+                  <div class="inner">
+                     {% for img in images %}
+                     {% if img.project == proj %}
+                     <img src="{{ img.image.url }}" style="height:300px" alt="#">
+                     {%  endif %}
+                     {% endfor %}
+                  </div>
+                  <div class="text-box">
+                     {{proj.category}} 
+                  </div>
+               </div>
+               <div class="case-one__single-content">
+                  <div class="inner">
+                     <div class="case-one__single-content-bg"
+                     style="background-image: url("{% static 'images/shapes/case-v1-shape1.png' %}");">
+                  </div>
+                  <h2><a href={% url 'singleproject' proj.id %}>{{proj.slug}}
+                     </a>
+                  </h2>
+                  <p> {{proj.details}}Help us touch there are many variations  </p>
+               </div>
+               <div class="case-one__progress">
+                  <div class="case-one__progress-box">
+                     <div class="bar">
+                        <div class="bar-inner count-bar" data-percent="45%">
+                           <div class="count-text">45%</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="bottom-text">
+                     <div class="left-text">
+                        <p>$10,450 <span>Raised </span></p>
+                     </div>
+                     <div class="right-text">
+                        <p>45% of $20,587</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {%endfor%}
+      <!--End Case One Single-->
+   </div>
+   </div>
+</section>
+<!--End Case One -->
+<!--Start Counter One -->
+<section class="counter-one">
+   <div class="container">
+      <div class="row">
+         <!--Start Counter One Single-->
+         <div class="col-xl-4 col-lg-4 wow animated fadeInUp" data-wow-delay="0.1s">
+            <div class="counter-one__single">
+               <div class="counter-one__single-top">
+                  <div class="img-box"><img src="{% static 'images/shapes/counter-v1-shape1.png' %}" alt="#">
+                  </div>
+                  <div class="text-box">
+                     <h2><span class="odometer" data-count="648">00</span>
+                     </h2>
+                  </div>
+               </div>
+               <div class="counter-one__single-bottom">
+                  <p>Registered Charities Supported</p>
+               </div>
+            </div>
+         </div>
+         <!--End Counter One Single-->
+         <!--Start Counter One Single-->
+         <div class="col-xl-4 col-lg-4 wow animated fadeInUp" data-wow-delay="0.2s">
+            <div class="counter-one__single">
+               <div class="counter-one__single-top">
+                  <div class="img-box"><img src="{% static 'images/shapes/counter-v1-shape2.png' %}" alt="#">
+                  </div>
+                  <div class="text-box">
+                     <h2> <span class="dollar">$</span> <span class="odometer" data-count="464">00</span>
+                        <span class="m">m</span>
+                     </h2>
+                  </div>
+               </div>
+               <div class="counter-one__single-bottom">
+                  <p>Raised For Charities</p>
+               </div>
+            </div>
+         </div>
+         <!--End Counter One Single-->
+         <!--Start Counter One Single-->
+         <div class="col-xl-4 col-lg-4 wow animated fadeInUp" data-wow-delay="0.3s">
+            <div class="counter-one__single">
+               <div class="counter-one__single-top">
+                  <div class="img-box"><img src="{% static 'images/shapes/counter-v1-shape3.png' %}" alt="#">
+                  </div>
+                  <div class="text-box">
+                     <h2><span class="odometer" data-count="587">{{number_of_registered_ppl}}</span> <span class="m">k</span>
+                     </h2>
+                  </div>
+               </div>
+               <div class="counter-one__single-bottom">
+                  <p>Users Making A Difference</p>
+               </div>
+            </div>
+         </div>
+         <!--End Counter One Single-->
+      </div>
+   </div>
+</section>
+<!--End Counter One -->
+<!--Start Gallery One -->
+<section class="gallery-one">
+   <div class="gallery-one__top">
+      <div class="shape1"><img src="{% static 'images/shapes/gallery-v1-shape1.png' %}" alt="#"></div>
+      <div class="shape2"><img src="{% static 'images/shapes/gallery-v1-shape2.png' %}" alt="#"></div>
+      <div class="gallery-one__top__bg"
+      style="background-image: url("{% static 'images/backgrounds/gallery-v1-bg' %}".jpg);">
+   </div>
+   <div class="container">
+      <div class="row">
+         <div class="col-xl-12">
+            <div class="gallery-one__top-inner text-center">
+               <div class="text-box">
+                  <h2>We support and empower children with chronic illnesses & their families by
+                     providing
+                     compassionate relevant services in their journey towards an enriching life
+                  </h2>
+               </div>
+               <div class="btn-box">
+                  <a class="thm-btn" href="become-volunteer.html">
+                  <span class="txt">Filter Your Categories</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   <div class="gallery-one__bottom">
+      <div class="auto-container">
+         <div class="row">
+            <!--Start Gallery One Single-->
+            {%for cat in categories%}
+            <div class="col-xl-3 col-lg-6 col-md-6 wow animated fadeInUp" data-wow-delay="0.4s">
+               <div class="gallery-one__single">
+                  <div class="gallery-one__single-img bg4">
+                     <img src={{cat.get_image_url}} "alt="#">
+                     <div class="text-box">
+                        <h2><a href={% url 'list_Projects_byCategory' cat.id %}>{{cat.name}}</a></h2>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {%endfor%}
+            <!--End Gallery One Single-->
+         </div>
+      </div>
+   </div>
+</section>
+<!--End Gallery One -->
+{% if projs_by_tag %}
+<!--Start Testimonial One -->
+<section class="testimonial-one" id="projects_by_tags">
+   <div class="auto-container">
+      <div class="sec-title text-center">
+         <div class="sec-title__tagline">
+            <h6>Here is projects bassed on your selected tags</h6>
+         </div>
+         <h2 class="sec-title__title">Projects Filtered by Tags</h2>
+      </div>
+      <div class="row">
+         {% for proj_by_tag in projs_by_tag %}
+         <!--Start Team One Single-->
+         <div class="col-xl-4 col-lg-4 wow fadeInRight" data-wow-delay="100ms"
+            data-wow-duration="1500ms">
+            <div class="team-one__single">
+               <div class="team-one__single-img">
+                  <div class="team-one__single-img-bg"
+                  style="background-image: url("{% static 'images/shapes/team-v1-shape1.png' %}");">
+               </div>
+               <div class="inner">
+                {% for img in images %}
+                {% if img.project == proj_by_tag %}
+                <img src="{{ img.image.url }}"  alt="#">
+
+                {%  endif %}
+                {% endfor %}
+               </div>
+            </div>
+            <div class="team-one__single-content text-center">
+               <h2><a href="#">{{proj_by_tag.title}}</a></h2>
+               <p>{{proj_by_tag.slug}}</p>
+            </div>
+         </div>
+      </div>
+      <!--End Team One Single-->
+      {%endfor%}
+   </div>
+   </div>
+</section>
+{% endif %}
+<!--End Testimonial One -->
+<!--Start Team One -->
+<section class="team-one">
+   <div class="auto-container">
+      <div class="team-one__inner">
+         <div class="team-one__bg" style="background-image: url("{% static 'images/pattern/team-v1-bg.jpg' %}");">
+      </div>
+      <div class="container">
+         <div class="team-one__top">
+            <div class="sec-title">
+               <div class="sec-title__tagline">
+                  <h6>Our Support Team</h6>
+               </div>
+               <h2 class="sec-title__title">Who are always helpful
+               </h2>
+            </div>
+            <div class="btn-box">
+               <a href="#">View All Expert List</a>
+            </div>
+         </div>
+         <div class="row">
+            <!--Start Team One Single-->
+            {%for user in supported_users%}
+            <div class="col-xl-4 col-lg-4 wow fadeInLeft" data-wow-delay="0ms"
+               data-wow-duration="1500ms">
+               <div class="team-one__single">
+                  <div class="team-one__single-img">
+                     <div class="team-one__single-img-bg"
+                     style="background-image: url("{% static 'images/shapes/team-v1-shape1.png' %}");">
+                  </div>
+                  <div class="inner">
+                     <img src={{user.photo.url}} alt="#">
+                  </div>
+               </div>
+               <div class="team-one__single-content text-center">
+                  <h2><a href="#">{{user.username}} </a></h2>
+                  <p>Head of Designer</p>
+               </div>
+            </div>
+         </div>
+         {%endfor%}
+         <!--End Team One Single-->
+         <!--Start Team One Single-->
+         <div class="col-xl-4 col-lg-4 wow fadeInRight" data-wow-delay="100ms"
+            data-wow-duration="1500ms">
+            <div class="team-one__single">
+               <div class="team-one__single-img">
+                  <div class="team-one__single-img-bg"
+                  style="background-image: url("{% static 'images/shapes/team-v1-shape1.png' %}");">
+               </div>
+               <div class="inner">
+                  <img src="{% static 'images/team/team-v1-img2.jpg' %}" alt="#">
+               </div>
+            </div>
+            <div class="team-one__single-content text-center">
+               <h2><a href="#">Martin Rage</a></h2>
+               <p>Marketing Expert and Head</p>
+            </div>
+         </div>
+      </div>
+      <!--End Team One Single-->
+   </div>
+   </div>
+   </div>
+   </div>
+</section>
+<!--End Team One -->
+<!--Start Blog One -->
+<section class="blog-one">
+   <div class="container">
+      <div class="sec-title text-center">
+         <div class="sec-title__tagline">
+            <h6>Our Recently Created Projects</h6>
+         </div>
+         <h2 class="sec-title__title">Latest News & Projects</h2>
+      </div>
+      <div class="row">
+         <!--Start Blog One Single-->
+         {%for project in recently_creatd_projects%}
+         <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay=".3s">
+            <div class="blog-one__single">
+               <div class="blog-one__single-img">
+                  <div class="inner">
+                     {% for img in images %}
+                     {% if img.project == project %}
+                     <img src="{{ img.image.url }}" style="height:300px" alt="#">
+                     {%  endif %}
+                     {% endfor %}
+                  </div>
+                  <ul class="overlay-text">
+                     <li>
+                        <p>{{project.category}}</p>
+                     </li>
+                     <li class="style2">
+                        <p>{{project.created_at|date:'d M'}}</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="blog-one__single-content">
+                  <div class="white-bg"></div>
+                  <div class="left-bg"></div>
+                  <div class="right-bg"></div>
+                  <ul class="meta-box">
+                     <li>
+                        <div class="icon">
+                           <span class="icon-user"></span>
+                        </div>
+                        <div class="text">
+                           <p><a href="#">By {{project.user|capfirst}}</a></p>
+                        </div>
+                     </li>
+                     <li>
+                        <div class="icon">
+                           <span class="icon-comment-outline"></span>
+                        </div>
+                        <div class="text">
+                           {% load custom_tags %}
+                           <p><a href="{% url 'singleproject' project.id %}"> {% get_method project %} Comment</a></p>
+                        </div>
+                     </li>
+                     <li class="mt-1">
+                        <div class="icon">
+                           <span ><i class="fa-regular fa-thumbs-up"></i></span>
+                        </div>
+                        <div class="text">
+                           {% load custom_tags %}
+                           <p><a href="{% url 'singleproject' project.id %}"> {% get_project_total_reactions project %} reactions</a></p>
+                        </div>
+                     </li>
+                  </ul>
+                  <h2><a href={% url 'singleproject'  project.id%}>{{project.title}}<br> International UK</a></h2>
+                  <div class="blog-one__single-content-bottom">
+                     <div class="btn-box">
+                        <a href={% url 'singleproject' project.id %}>Details More <span
+                           class="icon-right-arrow21"></span></a>
+                     </div>
+                     <div class="icon-box">
+                        {% get_user_react_on_project project as user_reaction %}
+                        {% if user_reaction %}
+                        <a href={% url 'like_project' project.id %}> 
+                        <i class="fa-solid fa-heart fa-2x like"></i>
+                        </a>
+                        {% else %}
+                        <a href={% url 'like_project' project.id %}> 
+                        <i class="fa-regular fa-heart"></i>
+                        </a>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+         <!--End Blog One Single-->
+      </div>
+   </div>
+</section>
+<!--End Blog One -->
+<!-- /.page-wrapper -->
+{% endblock 'content' %}

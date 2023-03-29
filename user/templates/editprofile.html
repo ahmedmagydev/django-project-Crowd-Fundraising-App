@@ -1,0 +1,48 @@
+
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block 'title' %} Registration {% endblock %}
+{% block 'content' %}
+
+  <!--Start Page Header-->
+  {% comment %} <section class="page-header">
+    <div class="container">
+        <div class="page-header__inner text-center">
+            <h2>Donation List</h2>
+            <ul class="thm-breadcrumb">
+                <li><a href="index.html">Home</a></li>
+    
+
+
+                <li><span>-</span></li>
+                <li>Donation List</li>
+            </ul>
+        </div>
+    </div>
+</section> {% endcomment %}
+<div class="container">
+
+ <form method="post">
+    <br/>
+    <br/>
+    {%csrf_token%}
+    {{form|crispy}}
+
+    <button type="submit" class="btn btn-dark w-25 m-2">
+        Update
+    </button>
+
+
+ </form>
+
+
+    <a href="{%url 'optional' user.id %}" class="btn btn-outline-success  active m-2" role="button"
+               aria-pressed="true">Optional</a>
+    <a href="{% url 'profile' user.id %}"  class='btn btn-danger m-2' > cancel</a>
+</div>
+    <script src="{% static './js/script.js' %}"> </script>
+
+{% endblock %}

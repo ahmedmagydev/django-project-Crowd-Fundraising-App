@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %} 
+
+{% load crispy_forms_tags %} 
+
+{% load static %}
+
+
+
+{% block 'title' %} 
+New Donation 
+{% endblock %} 
+
+{% block 'content' %}
+
+<!--Start Page Header-->
+<section class="page-header">
+  <div class="page-header__bg" style='background-image: url("{% static 'images/backgrounds/page-header-bg2.jpg' %}")'></div>
+  <div class="container">
+    <div class="page-header__inner text-center">
+      <h2>{{title}}</h2>
+      <ul class="thm-breadcrumb">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><span>-</span></li>
+        <li>{{title}}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!--End Page Header-->
+
+<!--Start Checkout Area-->
+<section class="checkout-area">
+  <div class="container">
+    <div class="form billing-info">
+      <div class="title">
+        <h3>Project Details</h3>
+      </div>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy project_form %}
+        {{ image_formset.management_form }}
+        {% for form in image_formset %}
+            {{ form.as_p }}
+        {% endfor %}
+    </form>
+    
+    {% if project.images.all %}
+        {% for image in project.images.all %}
+            <img src="{{ image.image.url }}" alt="Project Image">
+          {% endfor %}
+          {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
